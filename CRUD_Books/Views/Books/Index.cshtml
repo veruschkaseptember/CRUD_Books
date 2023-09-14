@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CRUD_Books.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+<h1>Book List</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityAvailable)
+            </th>
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-sm btn-success"> <i class="fa-solid fa-plus"></i> New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityAvailable)
+            </td>
+            <td>
+                     
+                    <form asp-action="Delete" asp-route-id="@item.Book_Id">
+                        <div class="btn-group btn-group-sm">
+                            <a asp-action="AddOrEdit" asp-route-id="@item.Book_Id" class="btn btn-warning"><i class="fa-solid fa-pencil"></i> </a>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you would like to delete this listing?')">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </form>
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
